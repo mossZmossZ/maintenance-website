@@ -1,0 +1,78 @@
+/* src/App.css */
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #2e073e;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #ffffff;
+}
+
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 40px;
+  animation: fadeIn 2s ease;
+  box-sizing: border-box;
+}
+
+.gear-icon {
+  color: #ffffff;
+  margin-bottom: 30px;
+  filter: drop-shadow(0 0 10px #ff00ff88);
+}
+
+.headline {
+  font-size: 3.5rem;
+  margin: 0;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.description {
+  font-size: 1.6rem;
+  max-width: 1000px;
+  margin-top: 20px;
+  line-height: 1.6;
+}
+
+.comeback {
+  font-size: 1.2rem;
+  margin-top: 40px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #ff66ff, 0 0 20px #ff33cc;
+  }
+  to {
+    text-shadow: 0 0 20px #ffccff, 0 0 30px #cc00cc;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.footer {
+  margin-top: 60px;
+  font-size: 1rem;
+  color: #dddddd;
+  text-align: center;
+  opacity: 0.7;
+  animation: fadeIn 2s ease;
+}
