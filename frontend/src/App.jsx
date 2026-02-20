@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
-  FaTools, 
   FaWrench, 
   FaCog, 
   FaClock, 
@@ -9,6 +8,26 @@ import {
   FaCheckCircle 
 } from "react-icons/fa";
 import "./App.css";
+
+// Gear Component
+function Gear({ rotationSpeed, direction, className, initialRotate = 0 }) {
+  return (
+    <motion.div
+      initial={{ rotate: initialRotate }}
+      animate={{ rotate: direction === "clockwise" ? 360 : -360 }}
+      transition={{ 
+        repeat: Infinity, 
+        duration: rotationSpeed, 
+        ease: "linear" 
+      }}
+      className={`gear ${className}`}
+    >
+      <FaCog className="gear-icon" />
+      <span className="gear-hub" aria-hidden="true" />
+      <span className="gear-hubCenter" aria-hidden="true" />
+    </motion.div>
+  );
+}
 
 function App() {
   const [time, setTime] = useState(new Date());
@@ -40,20 +59,31 @@ function App() {
       </div>
 
       <div className="content-container">
-        {/* Main Icon */}
+        {/* Main Icon - Two Meshing Gears */}
         <motion.div
           initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, type: "spring" }}
-          className="main-icon-wrapper"
+          animate={{ scale: 1, y: [0, -6, 0] }}
+          transition={{
+            scale: { duration: 0.5, type: "spring" },
+            y: { duration: 2.4, ease: "easeInOut", repeat: Infinity },
+          }}
+          className="gears-container"
         >
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="icon-outer-ring"
-          >
-            <FaTools className="main-icon" />
-          </motion.div>
+          {/* Larger Gear - Left side, rotates clockwise */}
+          <Gear 
+            rotationSpeed={4} 
+            direction="clockwise"
+            className="gear-large"
+            initialRotate={0}
+          />
+          
+          {/* Smaller Gear - Right side, meshing with larger gear, rotates counter-clockwise */}
+          <Gear 
+            rotationSpeed={3} 
+            direction="counter-clockwise"
+            className="gear-small"
+            initialRotate={18}
+          />
         </motion.div>
 
         {/* Main Content */}
